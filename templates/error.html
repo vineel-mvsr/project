@@ -1,0 +1,19 @@
+<!doctype html>
+
+<html lang="en">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/errorStyle.css')}}">
+
+    <div id="main">
+    	<div class="fof">
+        		<h1>Error 404</h1>
+                {% block content %}
+                {% if name is not none %}
+                  <div>Couldn't find any data associated with {{name}}..</div>
+                  <div> Please check for grammatical errors...</div>
+                  {% endif %}  
+                {% endblock content %}  
+    	</div>
+</div>
+
+</html>>

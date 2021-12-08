@@ -1,0 +1,129 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Songs List</title>
+    <meta name="description" content="Songs List">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/site.css')}}">
+    <script>
+        var sort_key = '{{ sort_key }}';
+        var sort_order = '{{ sort_order }}';
+        var search_query = '{{ search_query }}';
+    </script>
+
+</head>
+
+<body class="">
+    <div class="h-100 midnight-blue pa3 ph0-l pv6-l">
+        <div class="center mw7">
+            <article class="cf">
+                <header class="header">
+                    <div class="fl w-50-ns pa2">
+                        <h1 class="mt0">Songs</h1>
+                    </div>
+                </header>
+            </article>
+            <section class="song-table">
+
+                <div class="col-sm-12 col-md-6">
+                    <div id="">
+                        <label>Search Artist/Song:
+                            <form action="/search" method="get">
+                                <input type="search" name="q" value="{{ searchQuery }}" class="form-control form-control-sm" placeholder="">
+                            </form>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="songTable" class="table table-striped table-curved">
+                        <thead>
+                            <tr id="songHead">
+                                <th id="artist">Artist</th>
+                                <th id="song">Song</th>
+                                <th id="songReleaseDate">Release Date</th>
+                                <th id="playCount">PlayCount</th>
+                                <th id="metricA">Metric-A</th>
+                                <th id="metricB">Metric-B</th>
+                                <th id="metricC">Metric-C</th>
+                                <th id="metricD">Metric-D</th>
+                                <th id="metricE">Metric-E</th>
+                                <th id="metricF">Metric-F</th>
+                                <th id="metricG">Metric-G</th>
+                                <th id="metricH">Metric-H</th>
+                                <th id="metricI">Metric-I</th>
+                                <th id="metricJ">Metric-J</th>
+                                <th id="metricK">Metric-K</th>
+                                <th id="metricL">Metric-L</th>
+                                <th id="metricM">Metric-M</th>
+                                <th id="metricN">Metric-N</th>
+                                <th id="metricO">Metric-O</th>
+                                <th id="metricP">Metric-P</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            {% for song in response %}
+                            <tr>
+                                <td>{{song['artist']}}</td>
+                                <td>{{song['song']}}</td>
+                                <td>{{song['songReleaseDate']}}</td>
+                                <td>{{song['playCount']}}</td>
+                                <td>{{song['metricA']}}</td>
+                                <td>{{song['metricB']}}</td>
+                                <td>{{song['metricC']}}</td>
+                                <td>{{song['metricD']}}</td>
+                                <td>{{song['metricE']}}</td>
+                                <td>{{song['metricF']}}</td>
+                                <td>{{song['metricG']}}</td>
+                                <td>{{song['metricH']}}</td>
+                                <td>{{song['metricI']}}</td>
+                                <td>{{song['metricJ']}}</td>
+                                <td>{{song['metricK']}}</td>
+                                <td>{{song['metricL']}}</td>
+                                <td>{{song['metricM']}}</td>
+                                <td>{{song['metricN']}}</td>
+                                <td>{{song['metricO']}}</td>
+                                <td>{{song['metricP']}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+
+
+
+</body>
+
+<script>
+    var i, th, temp;
+    th = [];
+    temp = document.getElementById('songHead').getElementsByTagName('th');
+    for (i in temp) {
+        if (temp[i].hasOwnProperty) {
+            if (temp[i].id == sort_key) {
+                temp[i].className = ''
+                if (sort_order == "asc") {
+                    temp[i].classList.add("sorting_asc");
+                    temp[i].setAttribute("onClick", 'sort(key="' + temp[i].id + '", order = "desc")');
+                } else {
+                    temp[i].classList.add("sorting_desc");
+                    temp[i].setAttribute("onClick", 'sort(key="' + temp[i].id + '", order = "asc")');
+                }
+            } else {
+                temp[i].className = 'sorting'
+                temp[i].setAttribute("onClick", 'sort(key="' + temp[i].id + '", order = "asc")');
+            }
+        }
+    }
+
+    function sort(key, order) {
+        window.location.href = "/sort?key=" + key + "&order=" + order;
+
+    }
+</script>
+
+</html>
